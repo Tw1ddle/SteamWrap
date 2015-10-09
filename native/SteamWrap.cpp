@@ -417,7 +417,20 @@ value SteamWrap_SubmitUGCItemUpdate(value updateHandle, value changeNotes)
 DEFINE_PRIM(SteamWrap_SubmitUGCItemUpdate, 2);
 
 //-----------------------------------------------------------------------------------------------------------
-value SteamWrap_OpenOverlay(value url)
+value SteamWrap_OpenOverlay()
+{
+	if (!CheckInit())
+	{
+		return alloc_bool(false);
+	}
+	
+	SteamFriends()->ActivateGameOverlay(val_string(alloc_string("")));
+	return alloc_bool(true);
+}
+DEFINE_PRIM(SteamWrap_OpenOverlay, 0);
+
+//-----------------------------------------------------------------------------------------------------------
+value SteamWrap_OpenOverlayToWebPage(value url)
 {
 	if (!val_is_string(url) || !CheckInit())
 	{
@@ -427,7 +440,21 @@ value SteamWrap_OpenOverlay(value url)
 	SteamFriends()->ActivateGameOverlayToWebPage(val_string(url));
 	return alloc_bool(true);
 }
-DEFINE_PRIM(SteamWrap_OpenOverlay, 1);
+DEFINE_PRIM(SteamWrap_OpenOverlayToWebPage, 1);
+
+//-----------------------------------------------------------------------------------------------------------
+value SteamWrap_OpenOverlayToDialog(value name) // Activates the game overlay with an additional named dialog to open e.g. "Settings"
+{
+	if (!val_is_string(name) || !CheckInit())
+	{
+		return alloc_bool(false);
+	}
+	
+	SteamFriends()->ActivateGameOverlay(val_string(name));
+	return alloc_bool(true);
+}
+DEFINE_PRIM(SteamWrap_OpenOverlayToDialog, 1);
+
 //-----------------------------------------------------------------------------------------------------------
 value SteamWrap_StartUpdateUGCItem(value id, value itemID)
 {

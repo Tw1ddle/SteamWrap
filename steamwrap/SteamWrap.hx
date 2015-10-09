@@ -64,8 +64,9 @@ class SteamWrap
 			SteamWrap_SetUGCItemPreviewImage = cpp.Lib.load("steamwrap", "SteamWrap_SetUGCItemPreviewImage", 2);
 			SteamWrap_SubmitUGCItemUpdate = cpp.Lib.load("steamwrap", "SteamWrap_SubmitUGCItemUpdate", 2);
 			SteamWrap_GetCurrentGameLanguage = cpp.Lib.load("steamwrap", "SteamWrap_GetCurrentGameLanguage", 0);
-			SteamWrap_OpenOverlay = cpp.Lib.load("steamwrap", "SteamWrap_OpenOverlay", 1);
-
+			SteamWrap_OpenOverlay = cpp.Lib.load("steamwrap", "SteamWrap_OpenOverlay", 0);
+			SteamWrap_OpenOverlayToWebPage = cpp.Lib.load("steamwrap", "SteamWrap_OpenOverlayToWebPage", 1);
+			SteamWrap_OpenOverlayToDialog = cpp.Lib.load("steamwrap", "SteamWrap_OpenOverlayToDialog", 1);
 		}
 		catch (e:Dynamic)
 		{
@@ -136,8 +137,16 @@ class SteamWrap
 		SteamWrap_CreateUGCItem(appId);
 	}
 
-	public static function openOverlay(url:String){
-		SteamWrap_OpenOverlay(url);
+	public static function openOverlay(){
+		SteamWrap_OpenOverlay();
+	}
+	
+	public static function openOverlayToWebPage(url:String){
+		SteamWrap_OpenOverlayToWebPage(url);
+	}
+	
+	public static function openOverlayToDialog(dialogName:String){
+		SteamWrap_OpenOverlayToDialog(dialogName);
 	}
 
 	public static function isSteamRunning()
@@ -349,7 +358,8 @@ class SteamWrap
 	private static var SteamWrap_SubmitUGCItemUpdate:Dynamic;
 	private static var SteamWrap_GetCurrentGameLanguage:Dynamic;
 	private static var SteamWrap_OpenOverlay:Dynamic;
-
+	private static var SteamWrap_OpenOverlayToWebPage:Dynamic;
+	private static var SteamWrap_OpenOverlayToDialog:Dynamic;
 }
 
 class LeaderboardScore
